@@ -7,14 +7,26 @@ namespace BeardMan
     public class BranchModel
     {
         public int BranchId { get; set; }
-        public string Location { get; set; }
+        public int? LocationId { get; set; }
         public string Name { get; set; }
+
+        public BranchModel() { }
 
         public BranchModel(Branch branch)
         {
             BranchId = branch.BranchId;
-            Location = branch.Location;
+            LocationId = branch.LocationId;
             Name = branch.Name;
+        }
+
+        public Branch ConvertToBranch()
+        {
+            return new Branch
+            {
+                BranchId = BranchId,
+                LocationId = LocationId,
+                Name = Name
+            };
         }
     }
 }

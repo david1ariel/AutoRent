@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace BeardMan
 {
-    public partial class CarType
+    public class AvailableCarModel
     {
-        public CarType()
-        {
-            Cars = new HashSet<Car>();
-        }
-
-        public int CarTypeId { get; set; }
+        public string CarId { get; set; }
         public string Manufacturer { get; set; }
         public string Model { get; set; }
         public decimal? PricePerDay { get; set; }
@@ -18,7 +14,12 @@ namespace BeardMan
         public int? Year { get; set; }
         public string Gear { get; set; }
         public string ImageFileName { get; set; }
+        public int? Km { get; set; }
+        public int? CarTypeId { get; set; }
+        public bool? IsFixed { get; set; }
+        public bool? IsAvailable { get; set; }
+        public int? BranchId { get; set; }
 
-        public virtual ICollection<Car> Cars { get; set; }
+        public AvailableCarModel() { }
     }
 }

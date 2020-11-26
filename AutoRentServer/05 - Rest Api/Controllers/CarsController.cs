@@ -23,11 +23,13 @@ namespace BeardMan.Controllers
 
 
         [HttpGet]
+        [Route("available")]
         public IActionResult GetAllCars()
         {
             try
             {
-                return Ok(carsLogic.GetAllCars());
+                List<CarModel> allCars = carsLogic.GetAllCars();
+                return Ok(allCars.Select(p => carsLogic.ConstructAvaialbleCarModel(new CarModel(p))).ToList(););
             }
             catch (Exception ex)
             {

@@ -11,11 +11,16 @@ namespace BeardMan
         public string Manufacturer { get; set; }
         public string Model { get; set; }
         public decimal? PricePerDay { get; set; }
-        public string PricePerDayLate { get; set; }
+        public decimal? PricePerDayLate { get; set; }
         public int? Year { get; set; }
         public string Gear { get; set; }
         public IFormFile Image { get; set; }
         public string ImageFileName { get; set; }
+
+        public CarTypeModel()
+        {
+
+        }
 
 
         public CarTypeModel(CarType carType)

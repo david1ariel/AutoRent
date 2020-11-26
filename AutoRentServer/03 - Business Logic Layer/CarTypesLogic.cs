@@ -42,23 +42,18 @@ namespace BeardMan
 
 
             DB.SaveChanges();
-            return new CarTypeModel(carType);
+            carTypeModel.CarTypeId = carType.CarTypeId;
+            return carTypeModel;
         }
 
         public List<CarTypeModel> UpdateManyCarTypes(List<CarTypeModel> carTypesToUpdate)
         {
-            foreach (var item in carTypesToUpdate)
+            for (int i = 0; i < carTypesToUpdate.Count; i++)
             {
-                this.UpdateCarType(item);
+                carTypesToUpdate[i] = this.UpdateCarType(carTypesToUpdate[i]);
             }
 
-            List<CarTypeModel> carTypesToReturn = new List<CarTypeModel>();
-
-            foreach (var item in carTypesToUpdate)
-            {
-                carTypesToReturn.Add(new CarTypeModel(DB.CarTypes.SingleOrDefault(p => p.CarTypeId == item.CarTypeId)));
-            }
-            return carTypesToReturn;
+            return carTypesToUpdate;
         }
 
         

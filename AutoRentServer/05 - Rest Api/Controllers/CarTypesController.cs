@@ -37,7 +37,8 @@ namespace BeardMan.Controllers
         }
 
         [HttpPatch]
-        public IActionResult UpdateCarType([FromForm] CarTypeModel carTypeModel)
+        [Route("{id}")]
+        public IActionResult UpdateCarType(int id, [FromForm] CarTypeModel carTypeModel)
         {
             try
             {

@@ -12,7 +12,7 @@ namespace BeardMan
         }
 
         public int BranchId { get; set; }
-        public string Location { get; set; }
+        public int? LocationId { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<BranchesAdress> BranchesAdresses { get; set; }

@@ -18,12 +18,14 @@ namespace BeardMan
         public virtual DbSet<Adress> Adresses { get; set; }
         public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<BranchesAdress> BranchesAdresses { get; set; }
+        public virtual DbSet<BranchesLocation> BranchesLocations { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<CarType> CarTypes { get; set; }
         public virtual DbSet<CarsBranch> CarsBranches { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeesAdress> EmployeesAdresses { get; set; }
         public virtual DbSet<Home> Homes { get; set; }
+        public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Rent> Rents { get; set; }
         public virtual DbSet<RentsEmployee> RentsEmployees { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -55,8 +57,6 @@ namespace BeardMan
 
             modelBuilder.Entity<Branch>(entity =>
             {
-                entity.Property(e => e.Location).HasMaxLength(200);
-
                 entity.Property(e => e.Name).HasMaxLength(50);
             });
 
@@ -73,6 +73,21 @@ namespace BeardMan
                     .WithMany(p => p.BranchesAdresses)
                     .HasForeignKey(d => d.BranchId)
                     .HasConstraintName("FK_BranchesAdresses_Branches");
+            });
+
+            modelBuilder.Entity<BranchesLocation>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.HasOne(d => d.Branch)
+                    .WithMany()
+                    .HasForeignKey(d => d.BranchId)
+                    .HasConstraintName("FK_BranchesLocations_Branches");
+
+                entity.HasOne(d => d.Location)
+                    .WithMany()
+                    .HasForeignKey(d => d.LocationId)
+                    .HasConstraintName("FK_BranchesLocations_Locations");
             });
 
             modelBuilder.Entity<Car>(entity =>
@@ -184,6 +199,13 @@ namespace BeardMan
                 entity.Property(e => e.SundayToThursdayCloseHour).HasMaxLength(7);
 
                 entity.Property(e => e.SundayToThursdayOpenHour).HasMaxLength(7);
+            });
+
+            modelBuilder.Entity<Location>(entity =>
+            {
+                entity.Property(e => e.Latitude).HasMaxLength(50);
+
+                entity.Property(e => e.Longitude).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Rent>(entity =>
